@@ -179,3 +179,11 @@ def optgroups(field):
 @register.simple_tag
 def field_template():
     return BULMA_FIELD_TEMPLATE
+
+@register.simple_tag
+def form_template():
+    return BULMA_FORM_TEMPLATE
+
+@register.simple_tag
+def formset_template():
+    return BULMA_FORMSET_TEMPLATE

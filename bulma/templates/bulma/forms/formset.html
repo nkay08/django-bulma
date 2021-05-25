@@ -1,4 +1,6 @@
+{% load bulma_tags %}
 {{ formset.management_form }}
+{% form_template as templ %}
 {% for form in formset %}
-  {% include "bulma/forms/form.html" with form=form %}
+  {% include templ with form=form %}
 {% endfor %}
