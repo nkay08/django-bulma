@@ -1,0 +1,20 @@
+{% block inline_icon %}
+    {% if "has-icons-left" in classes.value %}
+        <span class="icon is-left {{ icon_left_class }}">
+          {% if icon_left %}
+            <i class="{{ icon_left }}"></i>
+          {% elif icon_left_custom %}
+              {{ icon_left_custom }}
+          {% endif %}
+        </span>
+    {% endif %}
+    {% if "has-icons-right" in classes.value %}
+        <span class="icon is-right {{ icon_left_class }}">
+            {% if icon_right %}
+                <i class="{{ icon_right }}"></i>
+          {% elif icon_right_custom %}
+              {{ icon_right_custom }}
+            {% endif %}
+        </span>
+    {% endif %}
+{% endblock inline_icon %}

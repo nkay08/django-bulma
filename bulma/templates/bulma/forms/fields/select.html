@@ -1,7 +1,7 @@
 {% load bulma_tags %}
 <label class="label {{ classes.label }}
     {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-<div class="control {{ classes.value }}">
+<div class="control {{ classes.value }}{% include 'bulma/forms/fields/inline_icon_css.html' %}">
   <span class="select{% if field|is_multiple_select %} is-multiple{% endif %}{% if field.errors|length > 0 %} is-danger{% endif %}">
     {{ field }}
   </span>
