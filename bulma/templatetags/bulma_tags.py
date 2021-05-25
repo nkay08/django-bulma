@@ -3,11 +3,13 @@ from django import template
 from django.forms import BoundField
 from django.template.loader import get_template
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 register = template.Library()
 
 BULMA_COLUMN_COUNT = 1
 
+BULMA_FIELD_TEMPLATE = getattr(settings, "BULMA_FIELD_TEMPLATE", "bulma/forms/field.html")
 
 @register.simple_tag
 def font_awesome():
@@ -73,7 +75,7 @@ def add_input_classes(field):
 def render(element, markup_classes):
     if isinstance(element, BoundField):
         add_input_classes(element)
-        template = get_template("bulma/forms/field.html")
+        template = get_template(BULMA_FIELD_TEMPLATE)
         context = {'field': element,
                    'classes': markup_classes, 'form': element.form}
     else:
