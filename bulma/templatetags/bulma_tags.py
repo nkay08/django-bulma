@@ -166,3 +166,10 @@ def bulma_message_tag(tag):
     return {
         'error': 'danger'
     }.get(tag, tag)
+
+@register.filter
+def optgroups(field):
+    values = tuple(str(val) for val in field.value()) if isinstance(field.value(), (list, tuple)) else (str(field.value()),)
+    attrs = field.field.widget.attrs or {}
+
+    return field.field.widget.optgroups(field.html_name, values, attrs)
