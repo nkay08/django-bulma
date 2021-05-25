@@ -6,8 +6,15 @@
 {% endif %}
 
 <div class="control {{ classes.value }} {% if field|is_multiple_checkbox %}multiple-checkbox{% endif %}">
-  {{ field }}
 
+    {% with opts=field|optgroups %}
+    {% for group, options, index in opts  %}
+          {% for option in options %}
+              {% include 'bulma/forms/fields/checkbox_option_widget.html' with widget=option %}
+          {% endfor %}
+    {% endfor %}
+
+    {%endwith%}
   {% for error in field.errors %}
     <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
   {% endfor %}
