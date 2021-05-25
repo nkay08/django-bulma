@@ -10,6 +10,8 @@ register = template.Library()
 BULMA_COLUMN_COUNT = 1
 
 BULMA_FIELD_TEMPLATE = getattr(settings, "BULMA_FIELD_TEMPLATE", "bulma/forms/field.html")
+BULMA_FORM_TEMPLATE = getattr(settings, "BULMA_FORM_TEMPLATE", "bulma/forms/form.html")
+BULMA_FORMSET_TEMPLATE = getattr(settings, "BULMA_FORMSET_TEMPLATE", "bulma/forms/formset.html")
 
 @register.simple_tag
 def font_awesome():
@@ -85,13 +87,13 @@ def render(element, markup_classes):
                 for field in form.visible_fields():
                     add_input_classes(field)
 
-            template = get_template("bulma/forms/formset.html")
+            template = get_template(BULMA_FORMSET_TEMPLATE)
             context = {'formset': element, 'classes': markup_classes}
         else:
             for field in element.visible_fields():
                 add_input_classes(field)
 
-            template = get_template("bulma/forms/form.html")
+            template = get_template(BULMA_FORM_TEMPLATE)
             context = {'form': element, 'classes': markup_classes}
 
     return template.render(context)
