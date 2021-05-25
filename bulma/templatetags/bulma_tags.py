@@ -173,3 +173,7 @@ def optgroups(field):
     attrs = field.field.widget.attrs or {}
 
     return field.field.widget.optgroups(field.html_name, values, attrs)
+
+@register.simple_tag
+def field_template():
+    return BULMA_FIELD_TEMPLATE
