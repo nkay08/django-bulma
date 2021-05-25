@@ -145,6 +145,9 @@ def is_radio(field):
 def is_file(field):
     return isinstance(field.field.widget, forms.FileInput)
 
+@register.filter
+def is_checkbox_select(field):
+    return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
 
 @register.filter
 def addclass(field, css_class):
