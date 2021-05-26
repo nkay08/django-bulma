@@ -104,6 +104,8 @@ However, fields can now also be used by simply including a template.
 - `bulma/forms/bulma_inline_field_include.html`: Can be included directly with a `with field=form.<your_field>` statement, and adds markup classes like the `bulma_inline` template filter
 - `bulma/forms/bulma_horizontal_field_include.html`: Can be included directly with a `with field=form.<your_field>` statement, and adds markup classes like the `bulma_horizontal` template filter
 
+You can customize the fields, e.g. by extending `bulma/forms/field_include.html` and overriding its blocks and then changing the respective setting.
+
 ## Settings
 You can specify which templates `django-bulma` uses for rendering forms and fields, and thus allow extensibility and customization.
 These affect `django-bulma`'s rendering template filters, but also all field templates that are prefixed with `bulma_`.
@@ -114,5 +116,10 @@ Options for `settings.py`:
 - `BULMA_FORM_TEMPLATE`: Specifies which form template is used by bulma rendering. Default `"bulma/forms/form.html"`.
 - `BULMA_FORMSET_TEMPLATE`: Specifies which formset template is used by bulma rendering. Default `"bulma/forms/formset.html"`. 
     
+## Bulma CSS
+
+- Inline icons: You can now generate inputs that have inline icons
+    - Add `has-icons-left` or `has-icons-right` or both as `classes_value` when including or providing them as parameter when using the `bulma` template tag 
+    - You can specify the icon css class with the context `icon_left_class` and `icon_right_class` (currently only possible when including template)
 
 
