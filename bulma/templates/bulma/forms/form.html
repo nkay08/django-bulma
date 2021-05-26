@@ -16,7 +16,7 @@
   {{ field }}
 {% endfor %}
 
-{% field_template as templ %}
+{% field_wrapper_template as field_wrapper_templ %}
 {% for field in form.visible_fields %}
-    {% include templ %}
+    {% include field_wrapper_templ %}
 {% endfor %}

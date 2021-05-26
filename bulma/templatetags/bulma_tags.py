@@ -9,7 +9,8 @@ register = template.Library()
 
 BULMA_COLUMN_COUNT = 1
 
-BULMA_FIELD_TEMPLATE = getattr(settings, "BULMA_FIELD_TEMPLATE", "bulma/forms/field.html")
+BULMA_FIELD_TEMPLATE = getattr(settings, "BULMA_FIELD_TEMPLATE", "bulma/forms/field_include.html")
+BULMA_FIELD_WRAPPER_TEMPLATE = getattr(settings, "BULMA_FIELD_WRAPPER_TEMPLATE", "bulma/forms/field.html")
 BULMA_FORM_TEMPLATE = getattr(settings, "BULMA_FORM_TEMPLATE", "bulma/forms/form.html")
 BULMA_FORMSET_TEMPLATE = getattr(settings, "BULMA_FORMSET_TEMPLATE", "bulma/forms/formset.html")
 
@@ -29,19 +30,47 @@ def font_awesome():
 
 @register.filter
 def bulma(element):
-    markup_classes = {'label': '', 'value': '', 'single_value': ''}
+    return bulma(element, label='', single_value='')
+
+@register.simple_tag
+def bulma(element, label='', value='', single_value=''):
+    markup_classes = bulma_markup_classes(label, value, single_value)
     return render(element, markup_classes)
 
+@register.simple_tag
+def bulma_markup_classes(element, label='', value='', single_value=''):
+    markup_classes = {'label': label, 'value': value, 'single_value': single_value}
+    return markup_classes
 
 @register.filter
 def bulma_inline(element):
-    markup_classes = {'label': 'sr-only', 'value': '', 'single_value': ''}
+    return bulma_inline(element, label='sr-only', single_value='')
+
+@register.simple_tag
+def bulma_inline(element, label='', value='', single_value=''):
+    markup_classes = bulma_inline_markup_classes(label, value, single_value)
     return render(element, markup_classes)
 
+@register.simple_tag
+def bulma_inline_markup_classes(element, label='', value='', single_value=''):
+    markup_classes = {'label': 'sr-only', 'value': value, 'single_value': single_value}
+    if label:
+        if not label in markup_classes['label']:
+            markup_classes['label'] += " %s" % label
+    return markup_classes
 
 @register.filter
 def bulma_horizontal(element, label_cols='is-2'):
-    markup_classes = {'label': label_cols, 'value': '', 'single_value': ''}
+    return bulma_horizontal(element, label_cols=label_cols)
+
+@register.simple_tag
+def bulma_horizontal(element, label_cols='is-2', value='', single_value=''):
+    markup_classes = bulma_horizontal_markup_classes(label_cols, value, single_value)
+    return render(element, markup_classes)
+
+@register.simple_tag
+def bulma_horizontal_markup_classes(element, label_cols='is-2', value='', single_value=''):
+    markup_classes = {'label': label_cols, 'value': value, 'single_value': single_value}
 
     for cl in label_cols.split(' '):
         splitted_class = cl.split('-')
@@ -61,9 +90,7 @@ def bulma_horizontal(element, label_cols='is-2'):
             markup_classes['single_value'] += ' ' + '-'.join(splitted_class)
 
         markup_classes['value'] += ' ' + '-'.join(splitted_class)
-
-    return render(element, markup_classes)
-
+    return markup_classes
 
 @register.filter
 def add_input_classes(field):
@@ -76,22 +103,16 @@ def add_input_classes(field):
 
 def render(element, markup_classes):
     if isinstance(element, BoundField):
-        add_input_classes(element)
-        template = get_template(BULMA_FIELD_TEMPLATE)
+        template = get_template(BULMA_FIELD_WRAPPER_TEMPLATE)
         context = {'field': element,
                    'classes': markup_classes, 'form': element.form}
     else:
         has_management = getattr(element, 'management_form', None)
         if has_management:
-            for form in element.forms:
-                for field in form.visible_fields():
-                    add_input_classes(field)
 
             template = get_template(BULMA_FORMSET_TEMPLATE)
             context = {'formset': element, 'classes': markup_classes}
         else:
-            for field in element.visible_fields():
-                add_input_classes(field)
 
             template = get_template(BULMA_FORM_TEMPLATE)
             context = {'form': element, 'classes': markup_classes}
@@ -150,10 +171,6 @@ def is_file(field):
     return isinstance(field.field.widget, forms.FileInput)
 
 @register.filter
-def is_checkbox_select(field):
-    return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
-
-@register.filter
 def addclass(field, css_class):
     if len(field.errors) > 0:
         css_class += ' is-danger'
@@ -179,6 +196,10 @@ def optgroups(field):
 @register.simple_tag
 def field_template():
     return BULMA_FIELD_TEMPLATE
+
+@register.simple_tag
+def field_wrapper_template():
+    return BULMA_FIELD_WRAPPER_TEMPLATE
 
 @register.simple_tag
 def form_template():

@@ -1,4 +1,4 @@
 {% load bulma_tags %}
-
 {% field_template as field_templ %}
+{% bulma_markup_classes as classes %}
 {% include field_templ with classes_label=classes.label classes_value=classes.value classes_single_value=classes.single_value %}

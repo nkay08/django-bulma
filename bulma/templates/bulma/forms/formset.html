@@ -1,6 +1,6 @@
 {% load bulma_tags %}
 {{ formset.management_form }}
-{% form_template as templ %}
+{% form_template as form_templ %}
 {% for form in formset %}
-  {% include templ with form=form %}
+  {% include form_templ with form=form %}
 {% endfor %}

@@ -1,5 +1,5 @@
 {% block inline_icon %}
-    {% if "has-icons-left" in classes.value %}
+    {% if "has-icons-left" in classes_value %}
         <span class="icon is-left {{ icon_left_class }}">
           {% if icon_left %}
             <i class="{{ icon_left }}"></i>
@@ -8,7 +8,7 @@
           {% endif %}
         </span>
     {% endif %}
-    {% if "has-icons-right" in classes.value %}
+    {% if "has-icons-right" in classes_value %}
         <span class="icon is-right {{ icon_left_class }}">
             {% if icon_right %}
                 <i class="{{ icon_right }}"></i>

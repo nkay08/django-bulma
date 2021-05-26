@@ -1,8 +1,8 @@
 {% load bulma_tags %}
-<label {% if field.auto_id %} for="{{ field.auto_id }}" {% endif %} class="label {{ classes.label }}
+<label {% if field.auto_id %} for="{{ field.auto_id }}" {% endif %} class="label {{ classes_label }}
     {% if field.field.required %}{{ form.required_css_class }}{% endif %}">{{ field.label }}</label>
-<div class="control {{ classes.value }}{% include 'bulma/forms/fields/inline_icon_css.html' %}">
-  {{ field|addclass:'input' }}
+<div class="control {{ classes_value }}{% include 'bulma/forms/fields/inline_icon_css.html' %}">
+  {{ field|addclass:'input control' }}
         {% include 'bulma/forms/fields/inline_icon.html' %}
   {% for error in field.errors %}
     <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>

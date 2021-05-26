@@ -1,12 +1,12 @@
 {% load bulma_tags %}
 
 {% if field.auto_id %}
-  <label class="label {{ classes.label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}"
+  <label class="label {{ classes_label }} {% if field.field.required %}{{ form.required_css_class }}{% endif %}"
          for="{{ field.auto_id }}">{{ field.label }}</label>
 {% endif %}
 
-<div class="control {{ classes.value }} {% if field|is_multiple_checkbox %}multiple-checkbox{% endif %}">
-  {{ field }}
+<div class="control {{ classes_value }} {% if field|is_multiple_checkbox %}multiple-checkbox{% endif %}">
+  {{ field|addclass:"control" }}
 
   {% for error in field.errors %}
     <span class="help is-danger {{ form.error_css_class }}">{{ error }}</span>
