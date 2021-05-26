@@ -1,3 +1,9 @@
+## Fork of [Django Bulma (timonweb)](https://github.com/timonweb/django-bulma) 
+This fork moves more functionality into the templates, instead of adding CSS in python code.  
+It is also more extensible, since templates can be included and blocks can be overriden.
+
+For the added functionality, look at section [New Additions](#new-additions)
+
 # A Bulma Theme for Django Projects
 
 ![Django Bulma](https://raw.githubusercontent.com/timonweb/django-bulma/master/test_project/static/images/django-bulma-logo.png)
@@ -86,4 +92,27 @@ A Django base theme based on Bulma ([bulma.io](https://bulma.io/)). Bulma is a m
 
 If you have found a bug or if you have a request for additional functionality, please use the issue tracker on GitHub.
 
-[https://github.com/timonweb/django-bulma/issues](https://github.com/timonweb/django-bulma/issues)
+[https://github.com/nkay08/django-bulma/issues](https://github.com/nkay08/django-bulma/issues)
+
+# New Additions
+The form and fields can be rendered in exactly the same way as before. 
+However, fields can now also be used by simply including a template. 
+## Templates
+- `bulma/forms/field.html`: The basic field template that is included by django-bulma's `form.html`
+- `bulma/forms/field_include.html`: Can be included directly with a `with field=form.<your_field>` statement. Does NOT add markup classes, but they can be provided manually.
+- `bulma/forms/bulma_field_include.html`: Can be included directly with a `with field=form.<your_field>` statement, and adds markup classes like the `bulma` template filter
+- `bulma/forms/bulma_inline_field_include.html`: Can be included directly with a `with field=form.<your_field>` statement, and adds markup classes like the `bulma_inline` template filter
+- `bulma/forms/bulma_horizontal_field_include.html`: Can be included directly with a `with field=form.<your_field>` statement, and adds markup classes like the `bulma_horizontal` template filter
+
+## Settings
+You can specify which templates `django-bulma` uses for rendering forms and fields, and thus allow extensibility and customization.
+These affect `django-bulma`'s rendering template filters, but also all field templates that are prefixed with `bulma_`.
+
+Options for `settings.py`:
+- `BULMA_FIELD_TEMPLATE`: Specifies which field template is used by bulma rendering. Default `"bulma/forms/field_include.html"`.
+- `BULMA_FIELD_WRAPPER_TEMPLATE`: Specifies which field wrapper template is used by bulma rendering. This wrapper coverts some context dicts to flat variables. Default `"bulma/forms/field.html"`.
+- `BULMA_FORM_TEMPLATE`: Specifies which form template is used by bulma rendering. Default `"bulma/forms/form.html"`.
+- `BULMA_FORMSET_TEMPLATE`: Specifies which formset template is used by bulma rendering. Default `"bulma/forms/formset.html"`. 
+    
+
+
