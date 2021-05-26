@@ -1,5 +1,5 @@
 {% load bulma_tags %}
-<div class="field">
+{% if not no_field_div %}<div class="field">{% endif %}
   {% if field|is_checkbox %}
 
   {% block checkbox %}
@@ -47,4 +47,4 @@
     {% endblock other_input %}
 
   {% endif %}
-</div>
+{% if not no_field_div %}</div>{% endif %}
