@@ -73,8 +73,11 @@ jobs:
 
       - name: publish test.pypi
         run: |
-          poetry publish --repository https://test.pypi.org/legacy/ --username ${{ secrets.TEST_PYPI_USERNAME }} --password ${{ secrets.TEST_PYPI_API_TOKEN }}
+          poetry config repositories.testpypi https://test.pypi.org/legacy/
+          petry config pypi-token.testpypi ${{ secrets.TEST_PYPI_API_TOKEN }}
+          poetry publish -r testpypi
 
       - name: publish pypi
         run: |
-          poetry publish --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_API_TOKEN }}
+          petry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+          poetry publish
