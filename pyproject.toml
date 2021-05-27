@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-bulma-form-templates"
-version = "0.8.3"
+version = "0.8.4"
 description = "Bulma CSS Framework for Django projects"
 authors = ["NKay <n.klipp@nkay.info>"]
 license = "MIT"
