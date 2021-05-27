@@ -1,3 +1,5 @@
+from collections.abc import Iterable
+
 from bs4 import BeautifulSoup
 from django.template import engines
 
@@ -39,7 +41,12 @@ def element_has_all_attributes(element, attributes):
     for attribute_name, attribute_value in attributes.items():
         assert element.has_attr(attribute_name) is True
         print(element.get(attribute_name))
-        assert element.get(attribute_name) == attribute_value, f'Element {element} has attribute "{attribute_name}" with value {attribute_value}'
+        element_attrs = element.get(attribute_name)
+        if isinstance(attribute_value, Iterable):
+            for attr in attribute_value:
+                assert attr in element_attrs, f'Element {element} has attribute "{attribute_name}" with value {attr}'
+        else:
+            assert element_attrs == attribute_value, f'Element {element} has attribute "{attribute_name}" with value {attribute_value}'
             #return False
     #return True
 
