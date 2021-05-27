@@ -36,7 +36,7 @@ jobs:
 
       - name: run tests
         run: |
-          poetry run tox
+          poetry run tox -c tox-ghaction.ini
 
   publish:
     runs-on: ubuntu-latest
