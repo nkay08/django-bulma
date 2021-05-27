@@ -71,5 +71,5 @@ jobs:
 
       - name: publish pypi
         run: |
-          petry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+          poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
           poetry publish
