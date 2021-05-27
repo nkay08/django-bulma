@@ -74,7 +74,7 @@ jobs:
       - name: publish test.pypi
         run: |
           poetry config repositories.testpypi https://test.pypi.org/legacy/
-          petry config pypi-token.testpypi ${{ secrets.TEST_PYPI_API_TOKEN }}
+          poetry config pypi-token.testpypi ${{ secrets.TEST_PYPI_API_TOKEN }}
           poetry publish -r testpypi
 
       - name: publish pypi
