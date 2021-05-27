@@ -30,7 +30,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-          pip install pytest
 
       - name: install dependencies
         run: |
@@ -38,11 +37,11 @@ jobs:
 
       - name: downgrade django to matrix version
         run: |
-          pip install django==${{ matrix.django-version }}
+          poetry run pip install django==${{ matrix.django-version }}
 
-      - name: run tests
+      - name: run testss
         run: |
-          pytest -c tox-ghaction.ini
+          poetry run pytest -c tox-ghaction.ini
 
   publish:
     runs-on: ubuntu-latest
