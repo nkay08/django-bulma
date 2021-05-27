@@ -35,13 +35,9 @@ jobs:
         run: |
           poetry install
 
-      - name: downgrade django to matrix version
-        run: |
-          pip install django==${{ matrix.django-version }}
-
       - name: run tests
         run: |
-          poetry run tox -c tox-ghaction.ini
+          poetry run tox -c tox-ghaction.ini --force-dep django==${{ matrix.django-version }}
 
   publish:
     runs-on: ubuntu-latest
