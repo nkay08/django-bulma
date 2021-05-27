@@ -54,18 +54,10 @@ jobs:
         with:
           python-version: '3.6'
 
-      - name: install node & npm
-        run: |
-          sudo apt-get -yqq update && sudo apt-get install -yqq nodejs npm
-
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-
-      - name: install dependencies
-        run: |
-          poetry install
 
       - name: build
         run: |
