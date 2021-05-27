@@ -61,6 +61,10 @@ jobs:
         run: |
           poetry build
 
-      - name: publish
+      - name: publish test.pypi
         run: |
-          poetry publish
+          poetry publish --repository https://test.pypi.org/legacy/ --username ${{ secrets.TEST_PYPI_USERNAME }} --password ${{ secrets.TEST_PYPI_API_TOKEN }}
+
+      - name: publish pypi
+        run: |
+          poetry publish --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_API_TOKEN }}
