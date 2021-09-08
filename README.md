@@ -16,7 +16,7 @@ A Django base theme based on Bulma ([bulma.io](https://bulma.io/)). Bulma is a m
 
 1. Install the python package `django-bulma-form-templates`([on PyPi](https://pypi.org/project/django-bulma-form-templates/)) from pip
 
-  ``pip install django-bulma``
+  ``pip install django-bulma-form-templates``
 
   Alternatively, you can install download or clone this repo and call ``pip install -e .``.
 
